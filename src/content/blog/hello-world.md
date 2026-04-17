@@ -4,12 +4,14 @@ description: 'A personal blog about engineering, and the AI tools that help buil
 pubDate: 2026-04-17
 ---
 
-Welcome to my personal blog.
+I'm Alexandr — a Senior Engineer at CrowdStrike working on backend systems and cloud infrastructure, mostly in Go.
 
-I'm Alexandr — a Senior Engineer at CrowdStrike working on backend systems and cloud infrastructure, mostly in Go. This space is a place for me to write about the things I work on, think about, and find interesting.
+After 13+ years building things at scale, I've reached a point where I feel like I have something worth writing down. Not theory — just what I've learned from actually doing it.
 
-It's also something of an experiment. This blog was built almost entirely through conversation with an AI assistant. The layout, the styling, the components — all shaped through back-and-forth prompting rather than manual coding. I'm using this project as a way to explore what that kind of collaboration actually feels like in practice: where it accelerates things, where it falls short, and what it means for how engineers work.
+The name is deliberate. "The Append-Only Log" is an homage to the kind of problems I find most interesting: distributed systems, high-scale infrastructure, the engineering challenges where correctness and scale are both non-negotiable.
 
-So expect posts about distributed systems and backend engineering, but also the occasional reflection on AI-assisted development — from someone using it as a daily tool, not just theorizing about it.
+This blog was built AI-assisted — the layout, the components, the styling, all shaped through conversation with an AI tool. That makes it a small working example of how I think about AI in general: it's a capable tool, and in good hands it does good work. It's not a silver bullet, it's not going to reshape the industry — it's just another tool to get better at.
+
+Expect posts about distributed systems and backend engineering, and occasional takes on AI-assisted development from a practical angle, not an evangelical one.
 
 Thanks for stopping by.
