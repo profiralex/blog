@@ -7,9 +7,14 @@ import FormattedDate from '../components/FormattedDate.astro';
 import Header from '../components/Header.astro';
 import { BASE_PATH, SITE_DESCRIPTION, SITE_TITLE, STYLE_VARIABLES } from '../consts';
 
-const posts = (await getCollection('blog')).sort(
-	(a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
-);
+const pinned = ['hello-world'];
+const allPosts = await getCollection('blog');
+const posts = [
+	...allPosts.filter((p) => pinned.includes(p.id)),
+	...allPosts
+		.filter((p) => !pinned.includes(p.id))
+		.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()),
+];
 ---
 
 <!doctype html>
