@@ -1,14 +1,14 @@
 ---
-import { SITE_TITLE } from '../consts';
+import { BASE_PATH, SITE_TITLE } from '../consts';
 import HeaderLink from './HeaderLink.astro';
 ---
 
 <header>
 	<nav>
-		<h2><a href={import.meta.env.BASE_URL}>{SITE_TITLE}</a></h2>
+		<h2><a href={`${BASE_PATH}/`}>{SITE_TITLE}</a></h2>
 		<div class="internal-links">
-			<HeaderLink href={import.meta.env.BASE_URL}>Home</HeaderLink>
-			<HeaderLink href={`${import.meta.env.BASE_URL}/about`}>About</HeaderLink>
+			<HeaderLink href={`${BASE_PATH}/`}>Home</HeaderLink>
+			<HeaderLink href={`${BASE_PATH}/about`}>About</HeaderLink>
 		</div>
 		<div class="social-links">
 			<a href="https://github.com/profiralex" target="_blank" rel="noopener">

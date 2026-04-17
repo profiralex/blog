@@ -4,6 +4,7 @@ import avatar from '../assets/avatar.jpg';
 import BaseHead from '../components/BaseHead.astro';
 import Footer from '../components/Footer.astro';
 import Header from '../components/Header.astro';
+import { BASE_PATH } from '../consts';
 ---
 
 <!doctype html>
@@ -96,7 +97,7 @@ import Header from '../components/Header.astro';
 			}
 		</style>
 	</head>
-	<body style={`--bg-image: url('${import.meta.env.BASE_URL}/network-bg.svg')`}>
+	<body style={`--bg-image: url('${BASE_PATH}/network-bg.svg')`}>
 		<Header />
 		<main>
 			<div class="profile">

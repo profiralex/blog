@@ -6,8 +6,7 @@ import { defineConfig, fontProviders } from 'astro/config';
 
 // https://astro.build/config
 export default defineConfig({
-	site: 'https://profiralex.github.io',
-	base: '/blog',
+	site: 'https://alex.profir.dev',
 	integrations: [mdx(), sitemap()],
 	fonts: [
 		{
