@@ -22,7 +22,7 @@ body {
 	padding: 0;
 	text-align: left;
 	background-color: #f8f9fc;
-	background-image: url('/network-bg.svg');
+	background-image: var(--bg-image);
 	background-repeat: repeat;
 	background-size: 800px 800px;
 	word-wrap: break-word;
