@@ -1,63 +1,93 @@
-# Astro Starter Kit: Blog
+# astro-blog
+
+A personal blog built with [Astro](https://astro.build), MDX, and Mermaid diagram support.
+
+## Prerequisites
+
+- [Node.js](https://nodejs.org/) v18.17+ (v24 recommended)
+
+## Getting started
 
 ```sh
-npm create astro@latest -- --template blog
+npm install
+npm run dev
 ```
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+The dev server starts at `http://localhost:4321` (may use the next available port if 4321 is taken).
 
-Features:
+## Commands
 
-- ✅ Minimal styling (make it your own!)
-- ✅ 100/100 Lighthouse performance
-- ✅ SEO-friendly with canonical URLs and Open Graph data
-- ✅ Sitemap support
-- ✅ RSS Feed support
-- ✅ Markdown & MDX support
+| Command           | Action                                      |
+| :---------------- | :------------------------------------------ |
+| `npm run dev`     | Start local dev server                      |
+| `npm run build`   | Build production site to `./dist/`          |
+| `npm run preview` | Preview production build locally            |
 
-## 🚀 Project Structure
-
-Inside of your Astro project, you'll see the following folders and files:
+## Project structure
 
 ```text
-├── public/
-├── src/
-│   ├── assets/
-│   ├── components/
-│   ├── content/
-│   ├── layouts/
-│   └── pages/
-├── astro.config.mjs
-├── README.md
-├── package.json
-└── tsconfig.json
+src/
+  content/
+    blog/          ← blog posts (.md or .mdx)
+  layouts/
+    BlogPost.astro ← layout for all blog posts
+  components/      ← reusable UI components
+  pages/
+    index.astro    ← homepage
+    blog/          ← blog index and post routes
+  assets/          ← images and fonts
+public/            ← static files served as-is
+astro.config.mjs   ← Astro config (MDX integration)
 ```
 
-Astro looks for `.astro` or `.md` files in the `src/pages/` directory. Each page is exposed as a route based on its file name.
+## Writing articles
 
-There's nothing special about `src/components/`, but that's where we like to put any Astro/React/Vue/Svelte/Preact components.
+### Plain Markdown post
 
-The `src/content/` directory contains "collections" of related Markdown and MDX documents. Use `getCollection()` to retrieve posts from `src/content/blog/`, and type-check your frontmatter using an optional schema. See [Astro's Content Collections docs](https://docs.astro.build/en/guides/content-collections/) to learn more.
+Create a `.md` file in `src/content/blog/`:
 
-Any static assets, like images, can be placed in the `public/` directory.
+```md
+---
+title: 'My Post Title'
+description: 'A short description'
+pubDate: '2024-06-01'
+heroImage: '../../assets/blog-placeholder-1.jpg'
+---
 
-## 🧞 Commands
+Your content here.
+```
 
-All commands are run from the root of the project, from a terminal:
+### MDX post (with components or diagrams)
 
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `npm install`             | Installs dependencies                            |
-| `npm run dev`             | Starts local dev server at `localhost:4321`      |
-| `npm run build`           | Build your production site to `./dist/`          |
-| `npm run preview`         | Preview your build locally, before deploying     |
-| `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `npm run astro -- --help` | Get help using the Astro CLI                     |
+Create a `.mdx` file in `src/content/blog/`. MDX supports everything Markdown does, plus JSX components and Mermaid diagrams.
 
-## 👀 Want to learn more?
+### Adding Mermaid diagrams
 
-Check out [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+In any `.mdx` post, use a fenced code block with `mermaid` as the language:
 
-## Credit
+````md
+```mermaid
+flowchart TD
+    A[Start] --> B[Do something]
+    B --> C[End]
+```
+````
 
-This theme is based off of the lovely [Bear Blog](https://github.com/HermanMartinus/bearblog/).
+Mermaid diagrams are rendered client-side automatically. Supported diagram types include flowcharts, sequence diagrams, ER diagrams, Gantt charts, and more — see the [Mermaid docs](https://mermaid.js.org/intro/).
+
+### Frontmatter fields
+
+| Field         | Required | Description                        |
+| :------------ | :------- | :--------------------------------- |
+| `title`       | Yes      | Post title                         |
+| `description` | Yes      | Short description (used in SEO)    |
+| `pubDate`     | Yes      | Publication date (`YYYY-MM-DD`)    |
+| `updatedDate` | No       | Last updated date                  |
+| `heroImage`   | No       | Path to hero image                 |
+
+## Tech stack
+
+- [Astro](https://astro.build) — static site framework
+- [@astrojs/mdx](https://docs.astro.build/en/guides/integrations-guide/mdx/) — MDX support
+- [Mermaid](https://mermaid.js.org) — diagram rendering (client-side via CDN)
+- [@astrojs/sitemap](https://docs.astro.build/en/guides/integrations-guide/sitemap/) — sitemap generation
