@@ -4,7 +4,7 @@ A personal blog built with [Astro](https://astro.build), MDX, and Mermaid diagra
 
 ## Prerequisites
 
-- [Node.js](https://nodejs.org/) v18.17+ (v24 recommended)
+- [Node.js](https://nodejs.org/) v22.12.0+
 
 ## Getting started
 
@@ -22,22 +22,28 @@ The dev server starts at `http://localhost:4321` (may use the next available por
 | `npm run dev`     | Start local dev server                      |
 | `npm run build`   | Build production site to `./dist/`          |
 | `npm run preview` | Preview production build locally            |
+| `npm run astro`   | Run Astro CLI commands directly             |
 
 ## Project structure
 
 ```text
 src/
   content/
-    blog/          ← blog posts (.md or .mdx)
+    blog/              ← blog posts (.md or .mdx)
+  content.config.ts    ← content collection schema
   layouts/
-    BlogPost.astro ← layout for all blog posts
-  components/      ← reusable UI components
+    BlogPost.astro     ← layout for all blog posts
+  components/          ← reusable UI components
   pages/
-    index.astro    ← homepage
-    blog/          ← blog index and post routes
-  assets/          ← images and fonts
-public/            ← static files served as-is
-astro.config.mjs   ← Astro config (MDX integration)
+    index.astro        ← homepage
+    about.astro        ← about page
+    blog/              ← blog index and post routes
+    rss.xml.js         ← RSS feed (/rss.xml)
+  assets/
+    fonts/             ← self-hosted Atkinson font (woff)
+    *.jpg              ← blog placeholder images
+public/                ← static files served as-is
+astro.config.mjs       ← Astro config (MDX, sitemap, fonts)
 ```
 
 ## Writing articles
@@ -91,3 +97,10 @@ Mermaid diagrams are rendered client-side automatically. Supported diagram types
 - [@astrojs/mdx](https://docs.astro.build/en/guides/integrations-guide/mdx/) — MDX support
 - [Mermaid](https://mermaid.js.org) — diagram rendering (client-side via CDN)
 - [@astrojs/sitemap](https://docs.astro.build/en/guides/integrations-guide/sitemap/) — sitemap generation
+- [@astrojs/rss](https://docs.astro.build/en/guides/rss/) — RSS feed at `/rss.xml`
+- [sharp](https://sharp.pixelplumbing.com) — image optimization
+- Atkinson Hyperlegible font — self-hosted woff files in `src/assets/fonts/`
+
+## Configuration
+
+Before deploying, update the `site` URL in [astro.config.mjs](astro.config.mjs) (currently set to `https://example.com`). This is required for the sitemap and RSS feed to generate correct absolute URLs.
