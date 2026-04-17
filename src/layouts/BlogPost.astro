@@ -16,9 +16,11 @@ const { title, description, pubDate, updatedDate, heroImage } = Astro.props;
 		<BaseHead title={title} description={description} />
 		<style>
 			main {
-				width: calc(100% - 2em);
-				max-width: 100%;
-				margin: 0;
+				width: 720px;
+				max-width: calc(100% - 2em);
+				margin: auto;
+				background: #fff;
+				box-shadow: 0 0 0 1px rgba(229, 233, 240, 0.8);
 			}
 			.hero-image {
 				width: 100%;
@@ -82,7 +84,7 @@ const { title, description, pubDate, updatedDate, heroImage } = Astro.props;
 			</article>
 		</main>
 		<Footer />
-	<script type="module">
+	<script is:inline type="module">
 		import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs';
 		mermaid.initialize({ startOnLoad: false });
 		document.querySelectorAll('pre[data-language="mermaid"]').forEach((el) => {

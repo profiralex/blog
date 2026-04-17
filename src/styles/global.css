@@ -21,8 +21,10 @@ body {
 	margin: 0;
 	padding: 0;
 	text-align: left;
-	background: linear-gradient(var(--gray-gradient)) no-repeat;
-	background-size: 100% 600px;
+	background-color: #f8f9fc;
+	background-image: url('/network-bg.svg');
+	background-repeat: repeat;
+	background-size: 800px 800px;
 	word-wrap: break-word;
 	overflow-wrap: break-word;
 	color: rgb(var(--gray-dark));
@@ -34,6 +36,8 @@ main {
 	max-width: calc(100% - 2em);
 	margin: auto;
 	padding: 3em 1em;
+	background: #fff;
+	box-shadow: 0 0 0 1px rgba(var(--gray-light), 0.8);
 }
 h1,
 h2,
