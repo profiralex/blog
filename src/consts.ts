@@ -5,3 +5,5 @@ export const SITE_TITLE = 'Astro Blog';
 export const SITE_DESCRIPTION = 'Welcome to my website!';
 
 export const BASE_PATH = '';
+
+export const STYLE_VARIABLES = `--bg-image: url('${BASE_PATH}/network-bg.svg')`;
