@@ -4,7 +4,7 @@ description: 'A personal blog about engineering, and the AI tools that help buil
 pubDate: 2026-04-17
 ---
 
-I'm Alexandr — a Senior Engineer at CrowdStrike working on backend systems and cloud infrastructure, mostly in Go.
+I'm Alexandr — a Senior Engineer working on backend systems and cloud infrastructure, mostly in Go.
 
 After 13+ years building things at scale, I've reached a point where I feel like I have something worth writing down. Not theory — just what I've learned from actually doing it.
 
