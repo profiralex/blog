@@ -116,3 +116,16 @@
 Merge Phase 1 as a single PR (high visual delta, all touch the same files), then Phase 2 as 2-3 smaller PRs (schema change + tags is its own thing; footer/nav-active are trivial cleanups). Phase 3 is opt-in.
 
 Before starting Phase 1: pick the accent color (1.3) so the rest isn't guesswork.
+
+---
+
+## Follow-ups
+
+### F.1 Align theme-toggle icon vertically with header icons
+**Files:** [src/components/Header.astro](src/components/Header.astro)
+
+- The sun/moon `<button>` still sits visually lower than the sibling `<a>` icons (about, GitHub, LinkedIn) in the header, even after matching padding, border-bottom, and `font: inherit`.
+- Likely cause: the `<a>` elements render the inline SVG along the text baseline (a few px above the box's geometric center), while the button uses `inline-flex` + `align-items: center` and centers the SVG geometrically. The two positioning models drift.
+- Candidate fixes to try in order: (a) remove `inline-flex` and use plain `inline-block` on the button so the SVG is baseline-positioned like the anchors, (b) unify all `.right-links` children with `inline-flex align-items: center` (touch the existing anchors too), (c) nudge the SVG with a small `transform: translateY(...)` as a last resort.
+
+**Acceptance:** all four icons in the header sit on the same visual horizontal line at standard zoom levels.
