@@ -29,7 +29,7 @@ import HeaderLink from './HeaderLink.astro';
 					></path></svg
 				>
 			</a>
-			<button type="button" class="theme-toggle" data-theme-toggle aria-label="Toggle theme" style="padding-bottom: 30px;">
+			<button type="button" class="theme-toggle" data-theme-toggle aria-label="Toggle theme">
 				<svg viewBox="0 0 24 24" width="32" height="32" aria-hidden="true">
 					<defs>
 						<mask id="theme-toggle-mask">
@@ -76,6 +76,9 @@ import HeaderLink from './HeaderLink.astro';
 		justify-content: space-between;
 	}
 	nav a {
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
 		padding: 1em 0.5em;
 		color: var(--black);
 		border-bottom: 4px solid transparent;
@@ -117,11 +120,12 @@ import HeaderLink from './HeaderLink.astro';
 		transition: opacity 0.3s ease, transform 0.4s ease;
 	}
 	:root[data-theme='dark'] .theme-toggle-disc {
-		r: 8;
+		r: 10;
 	}
 	:root[data-theme='dark'] .theme-toggle-mask-circle {
-		cx: 17;
-		cy: 7;
+		cx: 18.25;
+		cy: 5.75;
+		r: 7.5;
 	}
 	:root[data-theme='dark'] .theme-toggle-rays {
 		opacity: 0;
