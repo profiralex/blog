@@ -5,7 +5,7 @@ const today = new Date();
 ---
 
 <footer>
-	Alexandr Profir · {today.getFullYear()}
+	Alexandr Profir · {today.getFullYear()} · Powered by <a href="https://astro.build" target="_blank" rel="noopener">Astro</a>
 	<div class="social-links">
 		<a href="https://github.com/profiralex" target="_blank" rel="noopener">
 			<span class="sr-only">Alexandr Profir on GitHub</span>
@@ -57,6 +57,12 @@ const today = new Date();
 		justify-content: center;
 		gap: 1em;
 		margin-top: 1em;
+	}
+	footer a {
+		color: rgb(var(--gray));
+	}
+	footer a:hover {
+		color: rgb(var(--gray-dark));
 	}
 	.social-links a {
 		text-decoration: none;
