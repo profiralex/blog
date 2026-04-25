@@ -28,9 +28,6 @@
 	--body-bg: #111418;
 	--surface-bg: #181c22;
 }
-:root[data-theme='dark'] body {
-	--bg-image: none !important;
-}
 :root[data-theme='dark'] .astro-code,
 :root[data-theme='dark'] .astro-code span {
 	color: var(--shiki-dark) !important;
@@ -45,9 +42,8 @@ body {
 	padding: 0;
 	text-align: left;
 	background-color: var(--body-bg);
-	background-image: var(--bg-image);
-	background-repeat: repeat;
-	background-size: 800px 800px;
+	background-image: radial-gradient(circle, rgba(var(--gray), 0.14) 1px, transparent 1px);
+	background-size: 24px 24px;
 	word-wrap: break-word;
 	overflow-wrap: break-word;
 	color: rgb(var(--gray-dark));

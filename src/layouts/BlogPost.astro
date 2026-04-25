@@ -6,7 +6,6 @@ import BaseHead from '../components/BaseHead.astro';
 import Footer from '../components/Footer.astro';
 import FormattedDate from '../components/FormattedDate.astro';
 import Header from '../components/Header.astro';
-import { STYLE_VARIABLES } from '../consts';
 
 type Props = CollectionEntry<'blog'>['data'] & { readingTime: number };
 
@@ -86,7 +85,7 @@ const { title, description, pubDate, updatedDate, heroImage, tags, readingTime }
 		</style>
 	</head>
 
-	<body style={STYLE_VARIABLES}>
+	<body>
 		<Header />
 		<main>
 			<article>
