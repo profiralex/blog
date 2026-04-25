@@ -25,7 +25,7 @@ This is an Astro 6 static blog with content collections. Key architectural point
 
 **Global constants:** `src/consts.ts` exports `SITE_TITLE` and `SITE_DESCRIPTION` — used by the RSS feed and page metadata.
 
-**Site URL:** `astro.config.mjs` has `site: 'https://example.com'` — this must be updated before deploying. The sitemap and RSS feed generate absolute URLs from this value.
+**Site URL:** `astro.config.mjs` has `site: 'https://alex.profir.dev'`. The sitemap and RSS feed generate absolute URLs from this value.
 
 **SEO/meta:** `BaseHead.astro` handles all `<head>` content including Open Graph, Twitter cards, canonical URL, RSS autodiscovery, and sitemap link. Every page composes this component.
 

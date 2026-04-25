@@ -76,12 +76,23 @@ const ogImage = new URL(`/og/${Astro.params.slug}.png`, Astro.site).href;
 				padding: 0;
 			}
 			.tags li {
+				padding: 0;
+			}
+			.tags a {
+				display: inline-block;
+				text-decoration: none;
+				padding: 0.156em 0.469em;
 				background: rgb(var(--gray-light));
 				color: rgb(var(--gray-dark));
-				padding: 0.25em 0.75em;
 				border-radius: 999px;
-				font-size: 0.85em;
+				font-size: 0.531em;
 				font-weight: 600;
+				transition: background 0.15s ease, color 0.15s ease;
+			}
+			.tags a:hover {
+				background: var(--accent);
+				color: #fff;
+				text-decoration: none;
 			}
 		</style>
 	</head>
@@ -111,7 +122,9 @@ const ogImage = new URL(`/og/${Astro.params.slug}.png`, Astro.site).href;
 						)}
 						{tags && tags.length > 0 && (
 							<ul class="tags">
-								{tags.map((tag) => <li>{tag}</li>)}
+								{tags.map((tag) => (
+								<li><a href={`/tags/${tag}/`}>{tag}</a></li>
+							))}
 							</ul>
 						)}
 						<hr />
