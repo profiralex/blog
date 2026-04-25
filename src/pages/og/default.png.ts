@@ -1,17 +1,13 @@
 import type { APIRoute } from 'astro';
 import { readFileSync } from 'node:fs';
-import { fileURLToPath } from 'node:url';
+import { join } from 'node:path';
 import satori from 'satori';
 import sharp from 'sharp';
 import { SITE_DESCRIPTION, SITE_TITLE } from '../../consts';
 
 export const GET: APIRoute = async ({ site }) => {
-	const fontRegular = readFileSync(
-		fileURLToPath(new URL('../../assets/fonts/atkinson-regular.woff', import.meta.url))
-	);
-	const fontBold = readFileSync(
-		fileURLToPath(new URL('../../assets/fonts/atkinson-bold.woff', import.meta.url))
-	);
+	const fontRegular = readFileSync(join(process.cwd(), 'src/assets/fonts/atkinson-regular.woff'));
+	const fontBold = readFileSync(join(process.cwd(), 'src/assets/fonts/atkinson-bold.woff'));
 
 	const svg = await satori(
 		{

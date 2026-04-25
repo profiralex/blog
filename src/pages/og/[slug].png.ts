@@ -1,7 +1,7 @@
 import type { APIRoute } from 'astro';
 import { getCollection, type CollectionEntry } from 'astro:content';
 import { readFileSync } from 'node:fs';
-import { fileURLToPath } from 'node:url';
+import { join } from 'node:path';
 import satori from 'satori';
 import sharp from 'sharp';
 
@@ -17,12 +17,8 @@ export const GET: APIRoute = async ({ props }) => {
 	const post = props as CollectionEntry<'blog'>;
 	const { title, description } = post.data;
 
-	const fontRegular = readFileSync(
-		fileURLToPath(new URL('../../assets/fonts/atkinson-regular.woff', import.meta.url))
-	);
-	const fontBold = readFileSync(
-		fileURLToPath(new URL('../../assets/fonts/atkinson-bold.woff', import.meta.url))
-	);
+	const fontRegular = readFileSync(join(process.cwd(), 'src/assets/fonts/atkinson-regular.woff'));
+	const fontBold = readFileSync(join(process.cwd(), 'src/assets/fonts/atkinson-bold.woff'));
 
 	const truncated =
 		description && description.length > 120 ? description.slice(0, 120) + '…' : description;
