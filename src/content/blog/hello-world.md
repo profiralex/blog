@@ -2,6 +2,7 @@
 title: 'Hello World'
 description: 'A personal blog about engineering, and the AI tools that help build it.'
 pubDate: 2026-04-17
+tags: ['hello_world']
 ---
 
 I'm Alexandr — a Senior Engineer working on backend systems and cloud infrastructure, mostly in Go.

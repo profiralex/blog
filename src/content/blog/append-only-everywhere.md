@@ -2,6 +2,7 @@
 title: 'Why Append-Only Data Structures Are Everywhere in Distributed Systems'
 description: 'Append-only thinking shows up in WALs, Kafka, event sourcing, and more. Here is why immutability is such a natural fit for distributed systems.'
 pubDate: 2026-04-18
+tags: ['distributed_systems']
 ---
 
 #### The Problem With Mutation

@@ -13,7 +13,11 @@ const posts = [
 	...allPosts
 		.filter((p) => !pinned.includes(p.id))
 		.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()),
-];
+].map((post) => {
+	const words = (post.body ?? '').split(/\s+/).filter(Boolean).length;
+	const readingTime = Math.max(1, Math.round(words / 220));
+	return { post, readingTime };
+});
 ---
 
 <!doctype html>
@@ -70,6 +74,23 @@ const posts = [
 				color: rgb(var(--gray-dark));
 				line-height: 1.55;
 			}
+			.tags {
+				display: flex;
+				flex-wrap: wrap;
+				gap: 0.5rem;
+				list-style: none;
+				margin: 0.75rem 0 0;
+				padding: 0;
+			}
+			.tags li {
+				padding: 0.25em 0.75em;
+				border: none;
+				background: rgb(var(--gray-light));
+				color: rgb(var(--gray-dark));
+				border-radius: 999px;
+				font-size: 0.85em;
+				font-weight: 600;
+			}
 		</style>
 	</head>
 	<body style={STYLE_VARIABLES}>
@@ -77,18 +98,24 @@ const posts = [
 		<main>
 			<ul>
 				{
-					posts.map((post) => {
+					posts.map(({ post, readingTime }) => {
 						const isPinned = pinned.includes(post.id);
+						const tags = post.data.tags;
 						return (
 							<li>
 								<a href={`${BASE_PATH}/blog/${post.id}/`}>
 									{isPinned && <span class="pinned">Pinned</span>}
 									<h3 class="title">{post.data.title}</h3>
 									<p class="date">
-										<FormattedDate date={post.data.pubDate} />
+										<FormattedDate date={post.data.pubDate} /> · {readingTime} min
 									</p>
 									{post.data.description && (
 										<p class="description">{post.data.description}</p>
+									)}
+									{tags && tags.length > 0 && (
+										<ul class="tags">
+											{tags.map((tag) => <li>{tag}</li>)}
+										</ul>
 									)}
 								</a>
 							</li>
