@@ -4,19 +4,29 @@ import BlogPost from '../../layouts/BlogPost.astro';
 
 export async function getStaticPaths() {
 	const posts = await getCollection('blog');
-	return posts.map((post) => ({
+	const sorted = [...posts].sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
+	return sorted.map((post, i) => ({
 		params: { slug: post.id },
-		props: post,
+		props: {
+			entry: post,
+			prevPost: sorted[i + 1] ?? null,
+			nextPost: sorted[i - 1] ?? null,
+		},
 	}));
 }
-type Props = CollectionEntry<'blog'>;
 
-const post = Astro.props;
+type Props = {
+	entry: CollectionEntry<'blog'>;
+	prevPost: CollectionEntry<'blog'> | null;
+	nextPost: CollectionEntry<'blog'> | null;
+};
+
+const { entry: post, prevPost, nextPost } = Astro.props;
 const { Content } = await render(post);
 const words = (post.body ?? '').split(/\s+/).filter(Boolean).length;
 const readingTime = Math.max(1, Math.round(words / 220));
 ---
 
-<BlogPost {...post.data} readingTime={readingTime}>
+<BlogPost {...post.data} readingTime={readingTime} prevPost={prevPost} nextPost={nextPost}>
 	<Content />
 </BlogPost>

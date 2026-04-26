@@ -1,23 +1,25 @@
 ---
+import { Image } from 'astro:assets';
 import { getCollection } from 'astro:content';
+import avatar from '../assets/avatar.jpg';
 import BaseHead from '../components/BaseHead.astro';
 import Footer from '../components/Footer.astro';
 import FormattedDate from '../components/FormattedDate.astro';
 import Header from '../components/Header.astro';
 import { BASE_PATH, SITE_DESCRIPTION, SITE_TITLE } from '../consts';
 
-const pinned = ['hello-world'];
+const featuredId = 'hello-world';
+
+function readingTime(body: string | undefined): number {
+	const words = (body ?? '').split(/\s+/).filter(Boolean).length;
+	return Math.max(1, Math.round(words / 220));
+}
+
 const allPosts = await getCollection('blog');
-const posts = [
-	...allPosts.filter((p) => pinned.includes(p.id)),
-	...allPosts
-		.filter((p) => !pinned.includes(p.id))
-		.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()),
-].map((post) => {
-	const words = (post.body ?? '').split(/\s+/).filter(Boolean).length;
-	const readingTime = Math.max(1, Math.round(words / 220));
-	return { post, readingTime };
-});
+const featured = allPosts.find((p) => p.id === featuredId) ?? null;
+const otherPosts = allPosts
+	.filter((p) => p.id !== featuredId)
+	.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
 ---
 
 <!doctype html>
@@ -25,6 +27,88 @@ const posts = [
 	<head>
 		<BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
 		<style>
+			.hero {
+				display: flex;
+				align-items: center;
+				gap: 1.25rem;
+				padding: 1.5rem 0 2rem;
+				border-bottom: 1px solid rgb(var(--gray-light));
+				margin-bottom: 2rem;
+			}
+			.hero-avatar {
+				width: 72px;
+				height: 72px;
+				border-radius: 50%;
+				object-fit: cover;
+				flex-shrink: 0;
+			}
+			.hero-name {
+				margin: 0 0 0.25rem;
+				font-size: 1.5rem;
+				font-weight: 700;
+				color: rgb(var(--black));
+				line-height: 1.2;
+			}
+			.hero-tagline {
+				margin: 0;
+				color: rgb(var(--gray));
+				font-size: 0.95rem;
+				line-height: 1.5;
+			}
+			.featured-card {
+				border: 1px solid rgb(var(--gray-light));
+				border-radius: 12px;
+				padding: 1.5rem;
+				margin-bottom: 2.5rem;
+				transition: border-color 0.15s ease, box-shadow 0.15s ease;
+			}
+			.featured-card:hover {
+				border-color: var(--accent);
+				box-shadow: 0 2px 12px rgba(var(--gray), 15%);
+			}
+			.featured-label {
+				display: inline-block;
+				font-size: 0.7rem;
+				font-weight: 700;
+				letter-spacing: 0.12em;
+				text-transform: uppercase;
+				color: var(--accent);
+				margin-bottom: 0.5rem;
+			}
+			.featured-title {
+				margin: 0 0 0.5rem;
+				font-size: 1.6rem;
+				line-height: 1.25;
+				color: rgb(var(--black));
+				transition: color 0.15s ease;
+			}
+			.featured-card a:hover .featured-title {
+				color: var(--accent);
+			}
+			.featured-meta {
+				margin: 0 0 0.75rem;
+				color: rgb(var(--gray));
+				font-size: 0.9rem;
+			}
+			.featured-desc {
+				margin: 0;
+				color: rgb(var(--gray-dark));
+				font-size: 0.95rem;
+				line-height: 1.6;
+			}
+			.featured-card > a {
+				display: block;
+				text-decoration: none;
+				color: inherit;
+			}
+			.section-heading {
+				font-size: 0.75rem;
+				font-weight: 700;
+				letter-spacing: 0.1em;
+				text-transform: uppercase;
+				color: rgb(var(--gray));
+				margin: 0 0 0.25rem;
+			}
 			ul {
 				list-style: none;
 				margin: 0;
@@ -34,9 +118,6 @@ const posts = [
 				padding: 1.75rem 0;
 				border-bottom: 1px solid rgb(var(--gray-light));
 			}
-			li:first-child {
-				padding-top: 0.5rem;
-			}
 			li:last-child {
 				border-bottom: none;
 			}
@@ -44,15 +125,6 @@ const posts = [
 				display: block;
 				text-decoration: none;
 				color: inherit;
-			}
-			.pinned {
-				display: inline-block;
-				font-size: 0.7rem;
-				font-weight: 700;
-				letter-spacing: 0.12em;
-				text-transform: uppercase;
-				color: rgb(var(--gray));
-				margin-bottom: 0.5rem;
 			}
 			.title {
 				margin: 0 0 0.35rem;
@@ -102,23 +174,60 @@ const posts = [
 				color: #fff;
 				text-decoration: none;
 			}
+			@media (max-width: 480px) {
+				.hero {
+					flex-direction: column;
+					text-align: center;
+					padding: 1.25rem 0 1.75rem;
+				}
+			}
 		</style>
 	</head>
 	<body>
 		<Header />
 		<main>
-			<ul>
-				{
-					posts.map(({ post, readingTime }) => {
-						const isPinned = pinned.includes(post.id);
+			<div class="hero">
+				<Image src={avatar} alt="Alexandr Profir" width={144} height={144} class="hero-avatar" />
+				<div>
+					<p class="hero-name">Alexandr Profir</p>
+					<p class="hero-tagline">Senior Engineer building distributed systems and cloud infrastructure in Go.</p>
+				</div>
+			</div>
+
+			{featured && (
+				<div class="featured-card">
+					<a href={`${BASE_PATH}/blog/${featured.id}/`}>
+						<span class="featured-label">Featured</span>
+						<h2 class="featured-title">{featured.data.title}</h2>
+						<p class="featured-meta">
+							<FormattedDate date={featured.data.pubDate} /> · {readingTime(featured.body)} min
+						</p>
+						{featured.data.description && (
+							<p class="featured-desc">{featured.data.description}</p>
+						)}
+					</a>
+					{featured.data.tags && featured.data.tags.length > 0 && (
+						<ul class="tags">
+							{featured.data.tags.map((tag) => (
+								<li><a href={`${BASE_PATH}/tags/${tag}/`}>{tag}</a></li>
+							))}
+						</ul>
+					)}
+				</div>
+			)}
+
+			{otherPosts.length > 0 && <p class="section-heading">Latest posts</p>}
+			{otherPosts.length > 0 && (
+				<ul>
+					{otherPosts.map((post) => {
+						const rt = readingTime(post.body);
 						const tags = post.data.tags;
 						return (
 							<li>
 								<a href={`${BASE_PATH}/blog/${post.id}/`}>
-									{isPinned && <span class="pinned">Pinned</span>}
 									<h3 class="title">{post.data.title}</h3>
 									<p class="date">
-										<FormattedDate date={post.data.pubDate} /> · {readingTime} min
+										<FormattedDate date={post.data.pubDate} /> · {rt} min
 									</p>
 									{post.data.description && (
 										<p class="description">{post.data.description}</p>
@@ -133,9 +242,9 @@ const posts = [
 								)}
 							</li>
 						);
-					})
-				}
-			</ul>
+					})}
+				</ul>
+			)}
 		</main>
 		<Footer />
 	</body>
