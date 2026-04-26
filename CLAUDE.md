@@ -31,4 +31,5 @@ This is an Astro 6 static blog with content collections. Key architectural point
 
 ## Git
 
-Do not include `Co-Authored-By` trailers in commit messages.
+- Do not include `Co-Authored-By` trailers in commit messages.
+- `improvements.md` is a local working document — do not stage or commit it.

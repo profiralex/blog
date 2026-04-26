@@ -58,13 +58,26 @@ const otherPosts = allPosts
 			.featured-card {
 				border: 1px solid rgb(var(--gray-light));
 				border-radius: 12px;
-				padding: 1.5rem;
+				overflow: hidden;
 				margin-bottom: 2.5rem;
 				transition: border-color 0.15s ease, box-shadow 0.15s ease;
 			}
 			.featured-card:hover {
 				border-color: var(--accent);
 				box-shadow: 0 2px 12px rgba(var(--gray), 15%);
+			}
+			.card-banner {
+				width: 100%;
+				height: 160px;
+				display: block;
+				background-size: cover;
+				background-position: center;
+			}
+			.card-body {
+				padding: 1.25rem 1.5rem 1rem;
+			}
+			.featured-card .tags {
+				padding: 0 1.5rem 1.25rem;
 			}
 			.featured-label {
 				display: inline-block;
@@ -100,6 +113,7 @@ const otherPosts = allPosts
 				display: block;
 				text-decoration: none;
 				color: inherit;
+				padding: 0;
 			}
 			.section-heading {
 				font-size: 0.75rem;
@@ -117,9 +131,25 @@ const otherPosts = allPosts
 			li {
 				padding: 1.75rem 0;
 				border-bottom: 1px solid rgb(var(--gray-light));
+				display: flex;
+				gap: 1rem;
+				align-items: flex-start;
 			}
 			li:last-child {
 				border-bottom: none;
+			}
+			.post-thumb {
+				width: 80px;
+				height: 80px;
+				border-radius: 8px;
+				flex-shrink: 0;
+				margin-top: 0.15rem;
+				background-size: cover;
+				background-position: center;
+			}
+			.post-content {
+				flex: 1;
+				min-width: 0;
 			}
 			a {
 				display: block;
@@ -157,6 +187,7 @@ const otherPosts = allPosts
 			.tags li {
 				padding: 0;
 				border: none;
+				display: block;
 			}
 			.tags a {
 				display: inline-block;
@@ -180,6 +211,10 @@ const otherPosts = allPosts
 					text-align: center;
 					padding: 1.25rem 0 1.75rem;
 				}
+				.post-thumb {
+					width: 56px;
+					height: 56px;
+				}
 			}
 		</style>
 	</head>
@@ -197,14 +232,17 @@ const otherPosts = allPosts
 			{featured && (
 				<div class="featured-card">
 					<a href={`${BASE_PATH}/blog/${featured.id}/`}>
-						<span class="featured-label">Featured</span>
-						<h2 class="featured-title">{featured.data.title}</h2>
-						<p class="featured-meta">
-							<FormattedDate date={featured.data.pubDate} /> · {readingTime(featured.body)} min
-						</p>
-						{featured.data.description && (
-							<p class="featured-desc">{featured.data.description}</p>
-						)}
+						<div class="card-banner" style={`background-image: url(/heroes/${featured.id}.svg)`} />
+						<div class="card-body">
+							<span class="featured-label">Featured</span>
+							<h2 class="featured-title">{featured.data.title}</h2>
+							<p class="featured-meta">
+								<FormattedDate date={featured.data.pubDate} /> · {readingTime(featured.body)} min
+							</p>
+							{featured.data.description && (
+								<p class="featured-desc">{featured.data.description}</p>
+							)}
+						</div>
 					</a>
 					{featured.data.tags && featured.data.tags.length > 0 && (
 						<ul class="tags">
@@ -224,22 +262,25 @@ const otherPosts = allPosts
 						const tags = post.data.tags;
 						return (
 							<li>
-								<a href={`${BASE_PATH}/blog/${post.id}/`}>
-									<h3 class="title">{post.data.title}</h3>
-									<p class="date">
-										<FormattedDate date={post.data.pubDate} /> · {rt} min
-									</p>
-									{post.data.description && (
-										<p class="description">{post.data.description}</p>
+								<div class="post-thumb" style={`background-image: url(/heroes/${post.id}.svg)`} />
+								<div class="post-content">
+									<a href={`${BASE_PATH}/blog/${post.id}/`}>
+										<h3 class="title">{post.data.title}</h3>
+										<p class="date">
+											<FormattedDate date={post.data.pubDate} /> · {rt} min
+										</p>
+										{post.data.description && (
+											<p class="description">{post.data.description}</p>
+										)}
+									</a>
+									{tags && tags.length > 0 && (
+										<ul class="tags">
+											{tags.map((tag) => (
+												<li><a href={`${BASE_PATH}/tags/${tag}/`}>{tag}</a></li>
+											))}
+										</ul>
 									)}
-								</a>
-								{tags && tags.length > 0 && (
-									<ul class="tags">
-										{tags.map((tag) => (
-											<li><a href={`${BASE_PATH}/tags/${tag}/`}>{tag}</a></li>
-										))}
-									</ul>
-								)}
+								</div>
 							</li>
 						);
 					})}

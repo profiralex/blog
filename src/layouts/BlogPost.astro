@@ -30,6 +30,13 @@ const ogImage = new URL(`/og/${Astro.params.slug}.png`, Astro.site).href;
 				border-radius: 12px;
 				box-shadow: var(--box-shadow);
 			}
+			.hero-svg {
+				display: block;
+				width: 100%;
+				height: auto;
+				border-radius: 12px;
+				box-shadow: var(--box-shadow);
+			}
 			.prose {
 				padding: 1em 0;
 				color: rgb(var(--gray-dark));
@@ -213,7 +220,10 @@ const ogImage = new URL(`/og/${Astro.params.slug}.png`, Astro.site).href;
 		<main>
 			<article>
 				<div class="hero-image">
-					{heroImage && <Image width={1020} height={510} src={heroImage} alt="" />}
+					{heroImage
+						? <Image width={1020} height={510} src={heroImage} alt="" />
+						: <img src={`/heroes/${Astro.params.slug}.svg`} class="hero-svg" alt="" width="800" height="300" />
+					}
 				</div>
 				<div class="prose">
 					<div class="title">

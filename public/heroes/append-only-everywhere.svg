@@ -1,0 +1,91 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 300">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#128a74"/>
+      <stop offset="100%" stop-color="#04312a"/>
+    </linearGradient>
+    <marker id="arrow" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto">
+      <path d="M 0 0 L 10 4 L 0 8 Z" fill="rgba(255,255,255,0.7)"/>
+    </marker>
+  </defs>
+
+  <!-- Background -->
+  <rect width="800" height="300" fill="url(#bg)"/>
+
+  <!-- Ground -->
+  <line x1="0" y1="272" x2="800" y2="272" stroke="rgba(255,255,255,0.15)" stroke-width="1.5"/>
+
+  <!-- PRODUCER box -->
+  <g stroke="white" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round">
+    <rect x="48" y="95" width="130" height="90" rx="12" ry="12" stroke-opacity="0.85"/>
+    <!-- antenna -->
+    <line x1="80" y1="95" x2="80" y2="72" stroke-opacity="0.5" stroke-width="2"/>
+    <line x1="146" y1="95" x2="146" y2="72" stroke-opacity="0.5" stroke-width="2"/>
+    <path d="M 74 72 Q 113 60 152 72" stroke-opacity="0.5" stroke-width="2"/>
+    <!-- gear icon inside -->
+    <circle cx="113" cy="132" r="16" stroke-width="2.5"/>
+    <circle cx="113" cy="132" r="6" stroke-width="2.5" fill="rgba(255,255,255,0.15)"/>
+    <line x1="113" y1="112" x2="113" y2="116" stroke-width="2.5"/>
+    <line x1="113" y1="148" x2="113" y2="152" stroke-width="2.5"/>
+    <line x1="93" y1="132" x2="97" y2="132" stroke-width="2.5"/>
+    <line x1="129" y1="132" x2="133" y2="132" stroke-width="2.5"/>
+  </g>
+  <text x="113" y="170" text-anchor="middle" fill="rgba(255,255,255,0.5)"
+        font-family="system-ui, -apple-system, sans-serif" font-size="11" letter-spacing="1.5">PRODUCER</text>
+
+  <!-- Arrow: Producer → Queue -->
+  <line x1="178" y1="140" x2="228" y2="140" stroke="rgba(255,255,255,0.6)" stroke-width="2.5" marker-end="url(#arrow)"/>
+
+  <!-- QUEUE (topic / log) -->
+  <g stroke="white" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round">
+    <rect x="236" y="88" width="130" height="104" rx="12" ry="12" stroke-opacity="0.85"/>
+    <!-- three stacked lines representing log entries -->
+    <line x1="254" y1="110" x2="330" y2="110" stroke-opacity="0.4" stroke-width="3"/>
+    <line x1="254" y1="125" x2="348" y2="125" stroke-opacity="0.7" stroke-width="3"/>
+    <line x1="254" y1="140" x2="318" y2="140" stroke-opacity="0.4" stroke-width="3"/>
+    <line x1="254" y1="155" x2="340" y2="155" stroke-opacity="0.55" stroke-width="3"/>
+    <!-- arrow indicators showing append direction -->
+    <line x1="328" y1="165" x2="352" y2="165" stroke-opacity="0.5" stroke-width="2"/>
+    <line x1="345" y1="160" x2="352" y2="165" stroke-opacity="0.5" stroke-width="2"/>
+    <line x1="345" y1="170" x2="352" y2="165" stroke-opacity="0.5" stroke-width="2"/>
+  </g>
+  <text x="301" y="208" text-anchor="middle" fill="rgba(255,255,255,0.5)"
+        font-family="system-ui, -apple-system, sans-serif" font-size="11" letter-spacing="1.5">APPEND-ONLY LOG</text>
+
+  <!-- Arrow: Queue → Consumer -->
+  <line x1="366" y1="140" x2="416" y2="140" stroke="rgba(255,255,255,0.6)" stroke-width="2.5" marker-end="url(#arrow)"/>
+
+  <!-- CONSUMER box -->
+  <g stroke="white" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round">
+    <rect x="424" y="95" width="130" height="90" rx="12" ry="12" stroke-opacity="0.85"/>
+    <!-- eye/sensor icon -->
+    <circle cx="489" cy="127" r="16" stroke-width="2.5"/>
+    <circle cx="489" cy="127" r="5" fill="rgba(255,255,255,0.15)" stroke="none"/>
+    <path d="M 473 127 Q 489 111 505 127" stroke-width="2.5" fill="none"/>
+    <path d="M 473 127 Q 489 143 505 127" stroke-width="2.5" fill="none"/>
+  </g>
+  <text x="489" y="170" text-anchor="middle" fill="rgba(255,255,255,0.5)"
+        font-family="system-ui, -apple-system, sans-serif" font-size="11" letter-spacing="1.5">CONSUMER</text>
+
+  <!-- Arrow: Consumer → Storage -->
+  <line x1="554" y1="140" x2="604" y2="140" stroke="rgba(255,255,255,0.6)" stroke-width="2.5" marker-end="url(#arrow)"/>
+
+  <!-- STORAGE (database cylinder) -->
+  <g stroke="white" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round">
+    <ellipse cx="684" cy="105" rx="58" ry="18" stroke-opacity="0.85"/>
+    <line x1="626" y1="105" x2="626" y2="195" stroke-opacity="0.85"/>
+    <line x1="742" y1="105" x2="742" y2="195" stroke-opacity="0.85"/>
+    <path d="M 626 195 Q 684 216 742 195" stroke-opacity="0.85"/>
+    <ellipse cx="684" cy="195" rx="58" ry="18" stroke-opacity="0.85" fill="rgba(255,255,255,0.06)"/>
+    <!-- internal lines -->
+    <path d="M 626 150 Q 684 171 742 150" stroke-opacity="0.25"/>
+  </g>
+  <text x="684" y="233" text-anchor="middle" fill="rgba(255,255,255,0.5)"
+        font-family="system-ui, -apple-system, sans-serif" font-size="11" letter-spacing="1.5">STORAGE</text>
+
+  <!-- Caption -->
+  <text x="400" y="260" text-anchor="middle" fill="rgba(255,255,255,0.35)"
+        font-family="system-ui, -apple-system, sans-serif" font-size="12" letter-spacing="1">
+    append-only everywhere
+  </text>
+</svg>
