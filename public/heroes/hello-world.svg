@@ -1,0 +1,72 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 300" role="img" aria-labelledby="hw-title hw-desc">
+  <title id="hw-title">Hello, World!</title>
+  <desc id="hw-desc">Three stickmen greeting each other, with a speech bubble saying Hello, World!</desc>
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#128a74"/>
+      <stop offset="100%" stop-color="#04312a"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Background -->
+  <rect width="800" height="300" fill="url(#bg)"/>
+
+
+
+  <!-- LEFT STICKMAN — arms relaxed at sides -->
+  <g stroke="white" stroke-linecap="round" stroke-linejoin="round" fill="none">
+    <circle cx="170" cy="148" r="24" stroke-width="3.5"/>
+    <circle cx="164" cy="144" r="2.5" fill="white" stroke="none"/>
+    <circle cx="176" cy="144" r="2.5" fill="white" stroke="none"/>
+    <path d="M 163 156 Q 170 164 177 156" stroke-width="2.5"/>
+    <line x1="170" y1="172" x2="170" y2="232" stroke-width="3.5"/>
+    <line x1="170" y1="195" x2="140" y2="230" stroke-width="3.5"/>
+    <line x1="170" y1="195" x2="200" y2="230" stroke-width="3.5"/>
+    <line x1="170" y1="232" x2="148" y2="272" stroke-width="3.5"/>
+    <line x1="170" y1="232" x2="192" y2="272" stroke-width="3.5"/>
+  </g>
+
+  <!-- CENTER STICKMAN — waving right arm, same size as others -->
+  <g stroke="white" stroke-linecap="round" stroke-linejoin="round" fill="none">
+    <circle cx="400" cy="138" r="24" stroke-width="3.5"/>
+    <circle cx="394" cy="134" r="2.5" fill="white" stroke="none"/>
+    <circle cx="406" cy="134" r="2.5" fill="white" stroke="none"/>
+    <path d="M 393 146 Q 400 154 407 146" stroke-width="2.5"/>
+    <line x1="400" y1="162" x2="400" y2="222" stroke-width="3.5"/>
+    <line x1="400" y1="183" x2="362" y2="218" stroke-width="3.5"/>
+    <line x1="400" y1="183" x2="442" y2="160" stroke-width="3.5"/>
+    <line x1="442" y1="160" x2="456" y2="136" stroke-width="3.5"/>
+    <line x1="400" y1="222" x2="376" y2="272" stroke-width="3.5"/>
+    <line x1="400" y1="222" x2="424" y2="272" stroke-width="3.5"/>
+  </g>
+
+  <!-- RIGHT STICKMAN — waving right arm, same size -->
+  <g stroke="white" stroke-linecap="round" stroke-linejoin="round" fill="none">
+    <circle cx="630" cy="148" r="24" stroke-width="3.5"/>
+    <circle cx="624" cy="144" r="2.5" fill="white" stroke="none"/>
+    <circle cx="636" cy="144" r="2.5" fill="white" stroke="none"/>
+    <path d="M 623 156 Q 630 164 637 156" stroke-width="2.5"/>
+    <line x1="630" y1="172" x2="630" y2="232" stroke-width="3.5"/>
+    <line x1="630" y1="195" x2="594" y2="225" stroke-width="3.5"/>
+    <line x1="630" y1="195" x2="668" y2="170" stroke-width="3.5"/>
+    <line x1="668" y1="170" x2="683" y2="147" stroke-width="3.5"/>
+    <line x1="630" y1="232" x2="607" y2="272" stroke-width="3.5"/>
+    <line x1="630" y1="232" x2="653" y2="272" stroke-width="3.5"/>
+  </g>
+
+  <!-- SPEECH BUBBLE — shifted left so tail points toward center stickman -->
+  <path d="M 242 12 H 458 A 14 14 0 0 1 472 26 V 56 A 14 14 0 0 1 458 70 H 390 L 375 92 L 358 70 H 242 A 14 14 0 0 1 228 56 V 26 A 14 14 0 0 1 242 12 Z"
+        fill="rgba(255,255,255,0.13)" stroke="rgba(255,255,255,0.45)" stroke-width="1.5" stroke-linejoin="round"/>
+  <text x="350" y="41" text-anchor="middle" dominant-baseline="middle"
+        fill="white" font-family="system-ui, -apple-system, sans-serif"
+        font-size="22" font-weight="600" letter-spacing="0.5">Hello, World!</text>
+
+  <!-- Motion lines near center stickman's waving hand -->
+  <g stroke="rgba(255,255,255,0.5)" stroke-linecap="round" stroke-width="2">
+    <line x1="463" y1="126" x2="477" y2="120"/>
+    <line x1="467" y1="141" x2="482" y2="139"/>
+    <line x1="460" y1="113" x2="473" y2="106"/>
+  </g>
+
+
+</svg>

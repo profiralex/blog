@@ -6,14 +6,17 @@ import BaseHead from '../components/BaseHead.astro';
 import Footer from '../components/Footer.astro';
 import FormattedDate from '../components/FormattedDate.astro';
 import Header from '../components/Header.astro';
+import TableOfContents from '../components/TableOfContents.astro';
+import type { Heading } from '../components/TableOfContents.astro';
 
 type Props = CollectionEntry<'blog'>['data'] & {
 	readingTime: number;
 	prevPost?: CollectionEntry<'blog'> | null;
 	nextPost?: CollectionEntry<'blog'> | null;
+	headings?: Heading[];
 };
 
-const { title, description, pubDate, updatedDate, heroImage, tags, readingTime, prevPost, nextPost } = Astro.props;
+const { title, description, pubDate, updatedDate, heroImage, tags, readingTime, prevPost, nextPost, headings } = Astro.props;
 const ogImage = new URL(`/og/${Astro.params.slug}.png`, Astro.site).href;
 ---
 
@@ -21,6 +24,10 @@ const ogImage = new URL(`/og/${Astro.params.slug}.png`, Astro.site).href;
 	<head>
 		<BaseHead title={title} description={description} image={ogImage} />
 		<style>
+			main {
+				max-width: 1024px;
+				width: 100%;
+			}
 			.hero-image {
 				width: 100%;
 			}
@@ -104,6 +111,9 @@ const ogImage = new URL(`/og/${Astro.params.slug}.png`, Astro.site).href;
 				background: var(--accent);
 				color: #fff;
 				text-decoration: none;
+			}
+			.content-area {
+				padding: 1em 0;
 			}
 			.post-footer {
 				margin-top: 3rem;
@@ -196,6 +206,12 @@ const ogImage = new URL(`/og/${Astro.params.slug}.png`, Astro.site).href;
 				overflow: hidden;
 				text-overflow: ellipsis;
 			}
+			@media (min-width: 1024px) {
+				.prose {
+					max-width: 720px;
+					margin: 0 auto;
+				}
+			}
 			@media (max-width: 480px) {
 				.post-nav {
 					grid-template-columns: 1fr;
@@ -225,32 +241,37 @@ const ogImage = new URL(`/og/${Astro.params.slug}.png`, Astro.site).href;
 						: <img src={`/heroes/${Astro.params.slug}.svg`} class="hero-svg" alt="" width="800" height="300" />
 					}
 				</div>
-				<div class="prose">
-					<div class="title">
-						<h1>{title}</h1>
-						<div class="byline">
-							<Image src={avatar} alt="Alexandr Profir" width={48} height={48} class="byline-avatar" />
-							<span class="byline-name">Alexandr Profir</span>
-							<span class="byline-sep">·</span>
-							<FormattedDate date={pubDate} />
-							<span class="byline-sep">·</span>
-							<span>{readingTime} min</span>
+				<div class="content-area">
+					<div class="prose">
+						<div class="title">
+							<h1>{title}</h1>
+							<div class="byline">
+								<Image src={avatar} alt="Alexandr Profir" width={48} height={48} class="byline-avatar" />
+								<span class="byline-name">Alexandr Profir</span>
+								<span class="byline-sep">·</span>
+								<FormattedDate date={pubDate} />
+								<span class="byline-sep">·</span>
+								<span>{readingTime} min</span>
+							</div>
+							{updatedDate && (
+								<p class="last-updated-on">
+									Last updated on <FormattedDate date={updatedDate} />
+								</p>
+							)}
+							{tags && tags.length > 0 && (
+								<ul class="tags">
+									{tags.map((tag) => (
+									<li><a href={`/tags/${tag}/`}>{tag}</a></li>
+								))}
+								</ul>
+							)}
+							<hr />
 						</div>
-						{updatedDate && (
-							<p class="last-updated-on">
-								Last updated on <FormattedDate date={updatedDate} />
-							</p>
-						)}
-						{tags && tags.length > 0 && (
-							<ul class="tags">
-								{tags.map((tag) => (
-								<li><a href={`/tags/${tag}/`}>{tag}</a></li>
-							))}
-							</ul>
-						)}
-						<hr />
+													<TableOfContents headings={headings ?? []} />
+							<slot />
 					</div>
-					<slot />
+					
+
 				</div>
 				<div class="post-footer">
 					<div class="author-block">
